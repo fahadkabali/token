@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import {Principal} from '@dfinity/principal';
+import {token_backend} from '../../../declarations/token_backend';
 
 function Balance() {
+   const [inputValue, setInput]= useState("");
+   const [balanceResult, setBalance] = useState("");
   
   async function handleClick() {
-    console.log("Balance Button Clicked");
+    // console.log("Balance Button Clicked");
+    const principal =Principal.fromText(inputValue);
+    const balance = await token_backend.balancesOf(principal)
+    setBalance(balance.toLocaleString());
   }
 
 
@@ -15,6 +22,8 @@ function Balance() {
           id="balance-principal-id"
           type="text"
           placeholder="Enter a Principal ID"
+          value={inputValue}
+          onChange={setInput(e.target.value)}
         />
       </p>
       <p className="trade-buttons">
