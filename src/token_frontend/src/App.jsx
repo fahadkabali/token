@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { token_backend } from 'declarations/token_backend';
 
 function App() {
   const [greeting, setGreeting] = useState('');
