@@ -13,7 +13,7 @@ function Balance() {
     const principal =Principal.fromText(inputValue);
     const balance = await token_backend.balancesOf(principal)
     setBalance(balance.toLocaleString());
-    setSymbol(await token_backend.getSymbol);
+    setSymbol(await token_backend.getSymbol());
     setHidden(false);
   }
 

@@ -1,6 +1,9 @@
 import Principal "mo:base/Principal";
 import HashMap "mo:base/HashMap";
 import Nat "mo:base/Nat";
+import Text "mo:base/Text";
+
+
 actor Token {
   var owner : Principal = Principal.fromText("vpbed-yyleh-an7du-k73lt-rcgvz-ogtcb-ufklk-libdg-gkroq-dywyp-3ae");
   var totalSupply :Nat = 1000000000;
@@ -19,4 +22,18 @@ actor Token {
   public query func getSymbol(): async Text{
     return symbol
   };
+  public shared(msg)func payOUt() : async Text{
+
+    if(balances.get(msg.caller)==null){
+      let amount = 10000;
+      balances.put(msg.caller, amount);
+      return "Success"
+
+    }else{
+      return "Already Acquired Tokens"
+    }; 
+  };
+  public func transfer(){
+    
+  }
 };
