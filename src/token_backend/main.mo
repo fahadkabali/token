@@ -26,14 +26,25 @@ actor Token {
 
     if(balances.get(msg.caller)==null){
       let amount = 10000;
-      balances.put(msg.caller, amount);
-      return "Success"
+
+      let result = await transfer(msg.caller, amount);
+      return result;
 
     }else{
-      return "Already Acquired Tokens"
+      return "Already Acquired Tokens";
     }; 
   };
-  public func transfer(){
-    
-  }
+  public shared(msg) func transfer(to:Principal, amount:Nat): async Text{
+    let fromBalance = await  balancesOf(msg.caller);
+    if(fromBalance > amount ){
+      let newFromBalance:Nat = fromBalance - amount;
+      balances.put(msg.caller,newFromBalance);
+      let toBalance = await balancesOf(to);
+      balances.put(to,toBalance + amount);
+      return "Transfer Successful!";
+    }else{
+      return "Not enough tokens in your account.";
+    }
+
+  };
 };
