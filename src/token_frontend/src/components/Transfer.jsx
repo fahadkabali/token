@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { token_backend, canisterId, createActor} from "../../../declarations/token_backend";
+import { canisterId, createActor} from "../../../declarations/token_backend";
 import { Principal } from "@dfinity/principal";
 import { AuthClient } from "@dfinity/auth-client";
 
@@ -14,7 +14,7 @@ function Transfer() {
   async function handleClick() {
     setHidden(true);
     const authClient = await AuthClient.create();
-    const identity = await authClient.getIdentity();
+    const identity = authClient.getIdentity();
     const authenticatedCanister = createActor(canisterId, {
       agentOptions: {
         identity,
