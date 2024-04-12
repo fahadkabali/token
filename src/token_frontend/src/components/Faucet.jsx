@@ -9,7 +9,7 @@ function Faucet() {
   async function handleClick(event) {
     setDisabled(true)
     const authClient = await AuthClient.create();
-    const identity = await authClient.getIdentity();
+    const identity = authClient.getIdentity();
     const authenticatedCanister = createActor(canisterId, {
       agentOptions: {
         identity,
